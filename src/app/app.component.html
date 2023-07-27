@@ -1,0 +1,131 @@
+  <div class="container" *ngIf="weatherData">
+
+    <div class="search">
+      <form #form ="ngForm" (submit)="onSubmit()"> 
+        <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName"> <!--The ngModel allows us to reference the variable cityName --> 
+      </form>
+    </div>
+
+    <div class="upper-data">
+      <!-- The *ngIf is used to add an if statement so that if a condition is met then the image will show  -->
+     <img src="../assets/hot.jpg" *ngIf="(weatherData.main.temp-32) * (5/9) > 15"> 
+     <img src="../assets/cold.jpg" *ngIf="(weatherData.main.temp-32) * (5/9) <= 15">
+
+     <div class="weather-data">
+      <div class="location">{{weatherData.name}}</div>
+      <div class="temperature">{{(weatherData.main.temp-32) * (5/9) | number: '1.0-0'}}°C</div>
+     </div>
+    </div>
+
+    <div class="lower-data">
+      <div class="more-info-label">
+        More Information
+      </div>
+      <div class="more-info-container">
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/min.jpg">
+            <span>min</span>
+          </div>
+          <div class="info-block-value">
+            {{(weatherData.main.temp_min-32) * (5/9)| number: '1.0-0'}}°C
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/max.jpg">
+            <span>max</span>
+          </div>
+          <div class="info-block-value">
+            {{(weatherData.main.temp_max-32) * (5/9)| number: '1.0-0'}}°C
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/humidity.png">
+            <span>humidity</span>
+          </div>
+          <div class="info-block-value">
+            {{weatherData.main.humidity}}%
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/wind.jpg">
+            <span>wind</span>
+          </div>
+          <div class="info-block-value">
+            {{weatherData.wind.speed}}km/h
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container" *ngIf="!weatherData">
+
+    <div class="upper-data">
+      <!-- comment this out ==> The *ngIf is used to add an if statement so that if a condition is met then the image will show -->
+     <img src="../assets/hot.jpg" *ngIf="14 > 15"> 
+     <img src="../assets/cold.jpg" *ngIf="14 <= 15">
+
+     <div class="weather-data">
+      <div class="location">Wellington</div>
+      <div class="temperature">{{14.40 | number: '1.0-0'}}°C</div>
+     </div>
+    </div>
+
+    <div class="lower-data">
+      <div class="more-info-label">
+        More Information
+      </div>
+      <div class="more-info-container">
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/min.jpg">
+            <span>min</span>
+          </div>
+          <div class="info-block-value">
+            10°C
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/max.jpg">
+            <span>max</span>
+          </div>
+          <div class="info-block-value">
+            20°C
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/humidity.png">
+            <span>humidity</span>
+          </div>
+          <div class="info-block-value">
+            77%
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-block-label">
+            <img src="../assets/wind.jpg">
+            <span>wind</span>
+          </div>
+          <div class="info-block-value">
+            11 km/h
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<router-outlet></router-outlet>
